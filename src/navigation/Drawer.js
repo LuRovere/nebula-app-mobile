@@ -1,6 +1,7 @@
 import Detail from '../screens/Details'
 import Home from '../screens/Home';
 import Login from '../screens/Login';
+import Payment from '../components/payment/Payment';
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 
@@ -17,6 +18,7 @@ const DrawerNavigation = () => {
     <Drawer.Screen name="Home" component={Home} options={{drawerLabelStyle: {color: 'white'}}} />
     <Drawer.Screen name="Login" component={Login} options={{drawerLabelStyle: {color: 'white'}}}/>
     <Drawer.Screen name="Detail" component={Detail} options={{drawerLabelStyle: {color: 'white'}}} />
+    <Drawer.Screen name="Payment" component={Payment} options={{drawerLabelStyle: {color: 'white'}}} />
   </Drawer.Navigator>
   )
 }

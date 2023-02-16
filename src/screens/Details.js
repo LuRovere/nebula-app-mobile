@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 
 const { height, width } = Dimensions.get('window')
 
-const Detail = ({ item, index }) => {
+const Detail = ({ item, index}) => {
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'black' }}>
 
@@ -38,7 +38,9 @@ const Detail = ({ item, index }) => {
                         <Text style={{ color: 'gray' }}> Developer : Yoozo Games</Text>
                     </View>
                 </View>
-                <Carousel />
+                <Carousel 
+                key={""}
+                />
                 <View>
                     <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', height: 60, margin: 30 }} > System Requirements</Text>
                 </View>
@@ -136,7 +138,6 @@ const styles = StyleSheet.create({
         margin: 10,
         height: 110,
         width: '80%',
-        backgroundColor: 'red',
         backgroundColor: '#16202D',
         borderWidth: 1,
         borderColor: '#725AC1',

@@ -6,7 +6,7 @@ import { useState } from "react";
 const { height, width } = Dimensions.get('window')
 
 
-export default function Carousel() {
+export default function Carousel({key}) {
     const tuData = [
         {
             nombre: 'Machu Picchu',
@@ -46,7 +46,7 @@ export default function Carousel() {
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
-                    key={tuData.map((index) => index)}
+                    key={key}
                     onScroll={e => {
                         const x = e.nativeEvent.contentOffset.x;
                         setCurrentIndex((x / width).toFixed(0))
