@@ -15,9 +15,11 @@ const allgamesreducers = createReducer(
             getAllGames.fulfilled,
             (state,action) =>{
                 let newState = {
-                    allgames: action.payload.response.allgames,
-                    text: action.payload.response.text,
+
+                    allgames: action.payload.response,
                     category: action.payload.response.category,
+                    text: action.payload.response.text
+
                 }
                 return newState
             }
@@ -26,7 +28,9 @@ const allgamesreducers = createReducer(
             getAllGamesByFilter.fulfilled,
             (state,action) =>{
                 let newState = {
-                    allgames: action.payload.response.allgames,
+
+                    allgames: action.payload.response,
+
                     category: action.payload.response.category,
                     text: action.payload.response.text
                 }
