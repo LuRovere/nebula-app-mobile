@@ -10,6 +10,8 @@ import Detail from '../screens/Details';
 
 
 
+import Favorites from '../screens/Favorites';
+
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -19,9 +21,9 @@ const DrawerNavigation = () => {
     >
     <Drawer.Screen name="Home" component={Home} />
     <Drawer.Screen name="Login" component={Login} />
+    <Drawer.Screen name="Favorites" component={Favorites} />
     <Drawer.Screen name="Detail" component={Detail} />
     <Drawer.Screen name="Store" component={Store} />
-
   </Drawer.Navigator>
   )
 }

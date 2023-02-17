@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+
 import { API_URL } from '../../../configs'
 
 
 const registrar_usuario = createAsyncThunk('registrar_usuario', async (data) => {
     let url = `${API_URL}auth/signup`
+
     try {
         let res = await axios.post(url,data)
         return { 
@@ -21,7 +23,9 @@ const registrar_usuario = createAsyncThunk('registrar_usuario', async (data) => 
 })
 
 const iniciar_sesion = createAsyncThunk('iniciar_sesion', async (data) => {
+
     let url = `${API_URL}auth/signin`
+
     try {
         let res = await axios.post(url,data)
         return { 
@@ -38,7 +42,9 @@ const iniciar_sesion = createAsyncThunk('iniciar_sesion', async (data) => {
 })
 
 const iniciar_sesion_con_token = createAsyncThunk('iniciar_sesion_con_token', async (token) => {
+
     let url = `${API_URL}auth/token`
+
     let headers = {headers: {'Authorization': `Bearer ${token}`}}
     try {
         let res = await axios.post(url,null,headers)
@@ -59,7 +65,9 @@ const iniciar_sesion_con_token = createAsyncThunk('iniciar_sesion_con_token', as
 })
 
 const cerrar_sesion = createAsyncThunk('cerrar_sesion', async (token) => {
+
     let url = `${API_URL}auth/signout`
+
     let headers = {headers: {'Authorization': `Bearer ${token}`}} 
     try {
         await axios.post(url,null, headers )

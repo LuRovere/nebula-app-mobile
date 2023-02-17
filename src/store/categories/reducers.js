@@ -1,3 +1,4 @@
+
 import { createReducer } from "@reduxjs/toolkit";
 import categoryActions from "./actions";
 
@@ -13,4 +14,6 @@ const categoryReducers = createReducer(initialState, (builder) => {
   });
 });
 
+
 export default categoryReducers;
+
