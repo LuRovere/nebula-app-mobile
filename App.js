@@ -1,16 +1,16 @@
-import { View,Text } from "react-native";
-import React from "react";
-import 'react-native-gesture-handler'
-import { NavigationContainer } from "@react-navigation/native";
-import DrawerNavigation from "./src/navigation/Drawer";
+import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import DrawerNavigation from './src/navigation/Drawer';
+import { Provider } from 'react-redux';
+import { store } from './src/store/store';
 
-
-const App=()=> {
+export default function App() {
   return (
-<NavigationContainer>
-    <DrawerNavigation/>
-</NavigationContainer>
+    <Provider store = {store}>
+    <NavigationContainer>
+      <DrawerNavigation/>
+    </NavigationContainer>
+    </Provider>
   );
 }
-
-export default App
