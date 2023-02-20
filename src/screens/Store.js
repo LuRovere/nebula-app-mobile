@@ -1,12 +1,12 @@
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, Text, Image, TouchableOpacity,ScrollView,TextInput  } from "react-native";
-import allGamesActions from "../store/allGames/actions";
+
 import GamesCategories from "../components/categories/GamesCategories";
-import { useEffect } from "react";
+import allGamesActions from "../store/allGames/actions";
+import { useFocusEffect } from '@react-navigation/native'
 
-
-const { getAllGamesByFilter } = allGamesActions;
+const { getAllGamesByFilter, getAllGames } = allGamesActions;
 
 function Store({ navigation }) {
   const gamesStore = useSelector((store) => store.allgames.allgames.allgames);
@@ -15,31 +15,42 @@ function Store({ navigation }) {
   const inputCategory = useSelector(
     (store) => store?.filterCategories.filterGame
   );
-  const [inputText,setInputText]= React.useState(text)
+  const [inputText, setInputText] = React.useState(text)
 
-  useEffect(()=>{
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(getAllGames(""))
+    }, [])
+  )
+
+  useFocusEffect(
+    useCallback(() => {
       dispatch(getAllGamesByFilter({
-        inputText,
-        inputCategory: inputCategory.join(",")  
-      }))
-      
-    },[inputText,inputCategory])
+        inputText: inputText, inputCategory: inputCategory.join(",")
+      },)
+      )
+    }, [inputText, inputCategory]));
 
-    const handleClickDeatils = (id) => {
-      navigation.navigate("Detail",{ gameId: id })
+
+  const handleClickDeatils = (id) => {
+    console.log( "ID:", id)
+    navigation.navigate("Detail", { gameId: id })
   }
-  
-  const handleText = (e)=>{
+
+  const handleText = (e) => {
     setInputText(e)
   }
+
   return (
-    <ScrollView style={styles.container}>
-      <GamesCategories/>
+    <ScrollView style={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
+      <GamesCategories />
       <TextInput
-          onChangeText={handleText}
-          placeholder="Find your game here"
-          style={styles.textInput}
-        />
+        onChangeText={handleText}
+        placeholder="Find your game here"
+        style={styles.textInput}
+      />
       {gamesStore.map((game, index) => {
         return (
           <TouchableOpacity
@@ -99,7 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 5,
-    backgroundColor:"#242038",
+    backgroundColor: "#242038",
   },
   textInput: {
     height: 40,

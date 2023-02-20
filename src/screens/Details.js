@@ -4,42 +4,30 @@ import { useDispatch, useSelector } from "react-redux"
 
 import Carousel from '../components/carrousel/Carrousel'
 import { ScrollView } from 'react-native-gesture-handler'
+import gamesActions from "../store/games/action"
 import { useCallback } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
-import gamesActions from "../store/games/action"
+import { useRoute } from '@react-navigation/native';
 
 const { height, width } = Dimensions.get('window')
-
 const { getGame } = gamesActions;
-
 const Detail = ({ item, index }) => {
 
     const gameStore = useSelector((store) => store?.games);
-
-
     const dispatch = useDispatch()
 
     useFocusEffect(
         useCallback(() => {
             if (gameStore) {
-                dispatch(getGame('63e2ca9058a16079e6c746e9'));
+                dispatch(getGame(id));
             }
-        }, [])
+        }, [id])
     );
-
-    useEffect(() => {
-        if (gameStore) {
-            console.log(gameStore)
-        } else {
-            <Text>Sorry</Text>
-        }
-    }, [gameStore])
-
-
+    
     return (
-
         <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'black' }}>
-            <ScrollView style={styles.container}
+            <Text>Hola mundo</Text>
+        {/*     <ScrollView style={styles.container}
                 showsVerticalScrollIndicator={false}
             >
                 <View style={styles.containerCard}>
@@ -87,7 +75,7 @@ const Detail = ({ item, index }) => {
                         </Text>
                     </View>
                 </View>
-            </ScrollView>
+            </ScrollView>  */}
         </View>
     )
 }
@@ -190,4 +178,3 @@ const styles = StyleSheet.create({
         marginBottom: 60
     }
 })
- 
