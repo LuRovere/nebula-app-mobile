@@ -6,7 +6,7 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 2)
 
  const HEIGTH = Dimensions.get("window").height - ITEM_WIDTH
 
-const Carousel2 = ({item, index })=>{
+const CheapCard = ({item, index })=>{
     return (
 
       <View style={styles.container} key={index}>
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
      alignSelf:'center'
     }
   });
-export default Carousel2
+export default CheapCard
 
 /*
 fondo negro : #221F20

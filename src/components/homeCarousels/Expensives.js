@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { StyleSheet, Text, View,Pressable,Image } from 'react-native'
-import MiniCard, {SLIDER_WIDTH,ITEM_WIDTH} from './MiniCard'
+import ExpensiveCard, {SLIDER_WIDTH,ITEM_WIDTH} from './ExpensiveCard'
 import Carousel, {Pagination} from 'react-native-snap-carousel'
 import { useSelector,useDispatch } from 'react-redux'
 import allGamesActions from "../../store/allGames/actions";
@@ -14,14 +14,13 @@ export default function Carrusel({navigation}) {
   const gamesStore = useSelector((store) => store?.allgames?.allgames?.allgames);
 
   const gamesCopy = [...gamesStore]
-gamesCopy.sort(function compare(a, b) {
-  let priceA = new Number(a.price);
-  let priceB = new Number(b.price);
-  return priceA - priceB;
-})
+  gamesCopy.sort(function compare(a, b) {
+    let priceA = new Number(a.price);
+    let priceB = new Number(b.price);
+    return priceB - priceA;
+  })
 
-
-let gamesMoreExpensibeOnly5 = gamesCopy.slice(0,4)
+  let gamesMoreExpensibeOnly5 = gamesCopy.slice(0,8)
   console.log(gamesMoreExpensibeOnly5)
 
   useFocusEffect(
@@ -44,7 +43,7 @@ let gamesMoreExpensibeOnly5 = gamesCopy.slice(0,4)
         layoutCardOffset={9}
         ref={isCarousel}
         data={gamesMoreExpensibeOnly5}
-        renderItem={MiniCard}
+        renderItem={ExpensiveCard}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
         inactiveSlideShift={0}
@@ -54,7 +53,6 @@ let gamesMoreExpensibeOnly5 = gamesCopy.slice(0,4)
 <Pagination
   carouselRef={isCarousel}
 />
-
     </View>
     
   )

@@ -2,6 +2,8 @@ import { Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View } from
 import { useDispatch, useSelector } from "react-redux";
 import Carrusel from "../components/Carrusel";
 import MiniCarousel from "../components/homeCarousels/MiniCarousel";
+import CheapCarousel from '../components/homeCarousels/CheapCarousel'
+import Expensives from '../components/homeCarousels/Expensives'
 import React from "react";
 import Carousel, {Pagination} from 'react-native-snap-carousel'
 import { useState } from "react";
@@ -67,7 +69,14 @@ const Home = () => {
       <View style={styles.line}></View>
       <Text style={styles.titleGames}> ⇽ Games ⇾ </Text>
       <Carrusel />
-      <Text style={styles.titleGames}> ⇽ Games free ⇾ </Text>
+      
+     <Text style={styles.titleGames}> ⇽ Games Caros ⇾ </Text>
+          <Expensives/>
+
+     <Text style={styles.titleGames}> ⇽ Games Baratos ⇾ </Text>
+
+          <CheapCarousel/>
+     <Text style={styles.titleGames}> ⇽ Games free ⇾ </Text>
      <MiniCarousel />
     </ScrollView>
   );
