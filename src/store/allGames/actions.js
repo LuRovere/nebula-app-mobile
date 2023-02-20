@@ -1,14 +1,13 @@
+import { API_URL } from "../../../configs";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-import { API_URL } from "../../../configs";
 
 const getAllGamesByFilter = createAsyncThunk(
     "getAllGamesByFilter", 
   async ({inputText ,inputCategory}) => {
   try {
 
-    let allgames = await axios.get(`${API_URL}games?title=${inputText}&category_id=${inputCategory}`);
+    let allgames = await axios.get(`https://nebula-dzl2.onrender.com/api/games?title=${inputText}&category_id=${inputCategory}`);
 
     return {
       success: true,
@@ -29,7 +28,7 @@ const getAllGamesByFilter = createAsyncThunk(
 const getAllGames = createAsyncThunk(
   "getAllGames", 
 
-  async () => {
+  async ({inputText ,inputCategory}) => {
   try {
     let allgames = await axios.get('https://nebula-dzl2.onrender.com/api/games');
 
@@ -37,7 +36,6 @@ const getAllGames = createAsyncThunk(
       success: true,
       response: {
         allgames: allgames.data.response,
-
         text: inputText,
         category: inputCategory,
       },
@@ -52,7 +50,4 @@ const getAllGames = createAsyncThunk(
 });
 
 const allGamesActions = { getAllGames,  getAllGamesByFilter};
-
-
 export default allGamesActions;
-

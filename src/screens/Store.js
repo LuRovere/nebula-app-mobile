@@ -4,12 +4,13 @@ import { StyleSheet, View, Text, Image, TouchableOpacity,ScrollView,TextInput  }
 import allGamesActions from "../store/allGames/actions";
 import GamesCategories from "../components/categories/GamesCategories";
 import { useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 
 
 const { getAllGamesByFilter } = allGamesActions;
 
 function Store({ navigation }) {
-  const gamesStore = useSelector((store) => store.allgames.allgames.allgames);
+  const gamesStore = useSelector((store) => store?.allgames?.allgames?.allgames);
   const dispatch = useDispatch();
   const text = useSelector((store) => store.allgames.text);
   const inputCategory = useSelector(
@@ -17,13 +18,22 @@ function Store({ navigation }) {
   );
   const [inputText,setInputText]= React.useState(text)
 
-  useEffect(()=>{
+/*   useEffect(()=>{
       dispatch(getAllGamesByFilter({
         inputText,
         inputCategory: inputCategory.join(",")  
       }))
       
-    },[inputText,inputCategory])
+    },[inputText,inputCategory]) */
+
+    useFocusEffect(
+      useCallback(()=>{
+      dispatch(getAllGamesByFilter({
+        inputText,
+        inputCategory: inputCategory.join(",")  
+      }))
+    },[])
+    )
 
     const handleClickDeatils = (id) => {
       navigation.navigate("Detail",{ gameId: id })
@@ -40,7 +50,7 @@ function Store({ navigation }) {
           placeholder="Find your game here"
           style={styles.textInput}
         />
-      {gamesStore.map((game, index) => {
+      {gamesStore?.map((game, index) => {
         return (
           <TouchableOpacity
             style={styles.containerCard}

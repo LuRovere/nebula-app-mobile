@@ -7,15 +7,18 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 2)
  const HEIGTH = Dimensions.get("window").height - ITEM_WIDTH
 
 const Carousel2 = ({item, index })=>{
+
+  console.log(item)
+
     return (
 
       <View style={styles.container} key={index}>
       <Image
-        source={{ uri: item.image }}
+        source={{ uri: item.imgUrl }}
         style={styles.image}
       />
       
-      
+      <Text>ayuda</Text>
     </View>
     )
 }
