@@ -31,9 +31,7 @@ function Store({ navigation }) {
       )
     }, [inputText, inputCategory]));
 
-
   const handleClickDeatils = (id) => {
-    console.log( "ID:", id)
     navigation.navigate("Detail", { gameId: id })
   }
 
@@ -56,7 +54,7 @@ function Store({ navigation }) {
           <TouchableOpacity
             style={styles.containerCard}
             key={index}
-            onPress={() => handleClickDeatils(game.id)}
+            onPress={() => handleClickDeatils(game._id)}
           >
             <Image
               style={styles.gamePhoto}

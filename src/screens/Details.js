@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
 import Carousel from '../components/carrousel/Carrousel'
+import { Route } from '@react-navigation/native'
 import { ScrollView } from 'react-native-gesture-handler'
 import gamesActions from "../store/games/action"
 import { useCallback } from 'react'
@@ -16,6 +17,10 @@ const Detail = ({ item, index }) => {
     const gameStore = useSelector((store) => store?.games);
     const dispatch = useDispatch()
 
+    const route = useRoute();
+    const id = route.params.gameId;
+    console.log("AVERR:", id) 
+
     useFocusEffect(
         useCallback(() => {
             if (gameStore) {
@@ -23,11 +28,11 @@ const Detail = ({ item, index }) => {
             }
         }, [id])
     );
-    
+
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'black' }}>
             <Text>Hola mundo</Text>
-        {/*     <ScrollView style={styles.container}
+              <ScrollView style={styles.container}
                 showsVerticalScrollIndicator={false}
             >
                 <View style={styles.containerCard}>
@@ -75,7 +80,7 @@ const Detail = ({ item, index }) => {
                         </Text>
                     </View>
                 </View>
-            </ScrollView>  */}
+            </ScrollView> 
         </View>
     )
 }
