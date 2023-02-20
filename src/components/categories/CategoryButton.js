@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+
 import filterCategoryGamesActions from "../../store/filterCategory/action";
+import { useState } from "react";
 
 const { filterCategoryGames } = filterCategoryGamesActions;
 
@@ -41,17 +42,22 @@ export default function CategoryButton(props) {
 
 const styles = StyleSheet.create({
   buttonCategory: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    marginVertical: 10,
-    borderRadius: 10,
+    height: 40,
+    margin: 2,
+    borderWidth: 1.2,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 8,
+    backgroundColor: "#242038",
   },
   buttonCategoryActive: {
-    backgroundColor: "blue",
+    backgroundColor: "#725AC1",
+    borderColor: '#CAC4CE'
   },
   buttonText: {
     fontSize: 18,
-    color: "black",
+    height: 25,
+    color: 'white',
+    textAlign: 'center'
   },
 });

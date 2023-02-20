@@ -7,9 +7,9 @@ import allGamesActions from "../store/allGames/actions";
 import { useFocusEffect } from '@react-navigation/native'
 
 const { getAllGamesByFilter, getAllGames } = allGamesActions;
-
 function Store({ navigation }) {
-  const gamesStore = useSelector((store) => store.allgames.allgames.allgames);
+  const gamesStore = useSelector((store) => store?.allgames?.allgames?.allgames);
+  console.log(gamesStore)
   const dispatch = useDispatch();
   const text = useSelector((store) => store.allgames.text);
   const inputCategory = useSelector(
@@ -78,7 +78,9 @@ function Store({ navigation }) {
                   source={require("../../public/assets/appleIcon.png")}
                 />
               </View>
-              <Text style={styles.buttonPrice}>${game.price}</Text>
+              <View style={styles.buttonPrice}>
+              <Text style={{color: 'white'}}>${game.price}</Text>
+              </View>
             </View>
           </TouchableOpacity>
         );
@@ -109,21 +111,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 5,
     backgroundColor: "#242038",
+    height:35,
+    borderRadius: 5
   },
   textInput: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 1.2,
+    borderColor: 'black',
+    borderRadius: 5,
     padding: 10,
   },
   title: {
     color: "white",
     fontSize: 18,
     fontWeight: "bold",
+    marginLeft: 4
   },
   favIcon: {
-    width: 20,
-    height: 20,
+    width: 19,
+    height: 17,
+    marginRight: 4
   },
   footerCard: {
     flexDirection: "row",
@@ -137,11 +145,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: 30,
-    height: 30,
+    height: 35,
     marginRight: 10,
+    marginLeft: 1
   },
   buttonPrice: {
-    backgroundColor: "#333",
+    backgroundColor: "#242038",
     color: "white",
     paddingHorizontal: 20,
     paddingVertical: 10,

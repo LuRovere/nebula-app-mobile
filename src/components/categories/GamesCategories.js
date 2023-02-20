@@ -1,10 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+
 import { API_URL } from "../../../configs";
 import CategoryButton from "./CategoryButton";
-
-
+import axios from "axios";
 
 const GamesCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -44,6 +43,9 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width:"100%",
   },
+  buttonCategory: {
+    color: 'white'
+  }
 });
 
 export default GamesCategories;

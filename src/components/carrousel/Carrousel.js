@@ -7,7 +7,7 @@ import { useState } from "react";
 const { height, width } = Dimensions.get('window')
 
 
-export default function Carousel({ key }) {
+export default function Carousel({ index}) {
 
     const gameStore = useSelector((store) => store?.games?.game?.response);
     const pics = gameStore?.trailer.map((x) => x)
@@ -24,7 +24,7 @@ export default function Carousel({ key }) {
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
-                    key={key}
+                    key={index}
                     onScroll={e => {
                         const x = e.nativeEvent.contentOffset.x;
                         setCurrentIndex((x / width).toFixed(0))
@@ -36,20 +36,28 @@ export default function Carousel({ key }) {
                                     width: width,
                                     height: height / 2,
                                     justifyContent: 'center',
-                                    alignItems: 'center'
+                                    alignItems: 'center', 
                                 }}>
                                     <TouchableOpacity
                                         disabled={true}
                                         style={{
                                             width: '100%',
                                             height: '80%',
-                                            flexDirection: 'row-reverse'
+                                            flexDirection: 'row-reverse',
+                                            shadowColor: '#725AC1',
+                                            shadowOffset: {
+                                                width: -4,
+                                                height: 6,
+                                            },
+                                            shadowOpacity: 1,
+                                            shadowRadius: 5,
+                                            
                                         }}>
                                             {gameStore.trailer.map((pic) => {
                                             return (
                                                 <Image
                                                     source={{ uri: pic }}
-                                                    style={{ width: '100%', height: '80%', borderRadius: 10 }}
+                                                    style={{ width: '100%', height: '80%', borderRadius: 10}}
                                                     key={item.title}
                                                 />
                                             )
@@ -65,7 +73,7 @@ export default function Carousel({ key }) {
                 flexDirection: 'row',
                 width: width,
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
             }}>
                 {
                     pics.map((item, index) => {

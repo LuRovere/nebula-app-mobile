@@ -1,12 +1,15 @@
+import Carousel, { Pagination } from 'react-native-snap-carousel'
 import { Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import Carrusel from "../components/Carrusel";
-import MiniCarousel from "../components/MiniCarousel";
+import CheapCarousel from '../components/homeCarousels/CheapCarousel'
+import Expensives from '../components/homeCarousels/Expensives'
+import MiniCarousel from "../components/homeCarousels/MiniCarousel";
 import React from "react";
 import { useState } from "react";
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [variableAcount, setVariableAcount] = useState(false);
   const menuAcount = () => setVariableAcount(!variableAcount);
 
@@ -19,7 +22,6 @@ const Home = () => {
           source={require("../../assets/nebulaIsotipeLogotipePosibleVersion.png")}
         />
 
-        {/*  <Text style={styles.acount}>Acount</Text> */}
       </View>
       <View style={styles.line}></View>
       <View>
@@ -54,7 +56,7 @@ const Home = () => {
             style={styles.favImg}
           />
         </Pressable>
-        <Pressable onPress={() => navigation.navigate("store")}
+        <Pressable onPress={() => navigation.navigate("Store")}
           style={({ pressed }) => [
             {
               backgroundColor: pressed ? "#70d9fa" : "#725AC1"
@@ -62,20 +64,27 @@ const Home = () => {
             styles.buttonStore,
           ]}
         >
-          <Text style={styles.store}>Store</Text>
+          <Text style={styles.store} onPress={() => navigation.navigate("Store")} >Store</Text>
         </Pressable>
       </View>
       <View style={styles.line}></View>
-      <Text style={styles.titleGames}> ⇽ Games ⇾ </Text>
+      <Text style={styles.titleGames}> Games </Text>
       <Carrusel />
-      <Text style={styles.titleGames}> ⇽ Games free ⇾ </Text>
-      {/*    <MiniCarousel /> */}
+
+      <Text style={styles.titleGames}>  Play the highest quallity games  </Text>
+      <Expensives />
+
+      <Text style={styles.titleGames}>  Play the cheapest games  </Text>
+
+      <CheapCarousel />
+      <Text style={styles.titleGames}>  Play the best free games  </Text>
+      <MiniCarousel />
     </ScrollView>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#221F20",
+    backgroundColor: "#16202D",
   },
   nav: {
     display: "flex",
@@ -90,33 +99,19 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     height: "100%",
     width: "100%",
-  }, titleGames: {
+  }, 
+  titleGames: {
     backgroundColor: '#725AC1',
     width: "95%",
     height: 30,
     borderRadius: 5,
     display: 'flex',
     marginLeft: 10,
-    margin: 5,
+    marginTop: 15,
     textAlign: 'center',
     color: 'white',
     fontSize: 20,
-    padding: 5
   },
-  /*   acount:{
-      display: "flex",
-      alignSelf:'center',
-      color:'white',
-      fontSize:20,
-      marginLeft:110,
-      marginTop:5,
-      backgroundColor:'#725AC1',
-      padding:3,
-      paddingLeft:8,
-      borderRadius:5,
-      height:28,
-      width:70
-    }, */
   favImg: {
     height: 21,
     width: 23,
@@ -163,11 +158,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   line: {
-    height: 3,
+    height: 1,
     borderRadius: 5,
     width: "95%",
     marginLeft: 10,
-    backgroundColor: '#575561'
+    backgroundColor: '#725ac1'
   }
 });
 export default Home;

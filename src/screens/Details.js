@@ -1,9 +1,8 @@
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
 import Carousel from '../components/carrousel/Carrousel'
-import { Route } from '@react-navigation/native'
 import { ScrollView } from 'react-native-gesture-handler'
 import gamesActions from "../store/games/action"
 import { useCallback } from 'react'
@@ -12,14 +11,15 @@ import { useRoute } from '@react-navigation/native';
 
 const { height, width } = Dimensions.get('window')
 const { getGame } = gamesActions;
-const Detail = ({ item, index }) => {
+const Detail = ({ navigation }) => {
 
     const gameStore = useSelector((store) => store?.games);
+    console.log(gameStore)
     const dispatch = useDispatch()
 
     const route = useRoute();
     const id = route.params.gameId;
-    console.log("AVERR:", id) 
+    console.log('funcionaa o kee', id)
 
     useFocusEffect(
         useCallback(() => {
@@ -29,10 +29,15 @@ const Detail = ({ item, index }) => {
         }, [id])
     );
 
+    const handleClickPayment = (id) => {
+        console.log('a verrrr:', id)
+        navigation.navigate("Payment", { gameId: id })
+    }
+
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'black' }}>
-            <Text>Hola mundo</Text>
-              <ScrollView style={styles.container}
+
+            <ScrollView style={styles.container}
                 showsVerticalScrollIndicator={false}
             >
                 <View style={styles.containerCard}>
@@ -50,18 +55,21 @@ const Detail = ({ item, index }) => {
                     <View style={styles.containerIcons}>
                         <Image source={require('../../public/assets/windowsIcon.png')} style={styles.icon} />
                         <Image source={require('../../public/assets/appleIcon.png')} style={styles.icon} />
-                        <TouchableOpacity style={{ backgroundColor: '#8D86C9', padding: 2, borderRadius: 5 }}
+                        <TouchableOpacity
+                            onPress={() => handleClickPayment(gameStore?.game?.response?._id)}
+                            style={{ backgroundColor: '#8D86C9', padding: 2, borderRadius: 5 }}
                         >
                             <Image source={require('../../public/assets/shopIcon.png')} style={styles.iconShop} />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.containerInfo}>
-                        <Text style={{ color: 'gray', margin: 20 }} >Category :  {gameStore?.game?.response?.category}  </Text>
-                        <Text style={{ color: 'gray' }}> Developer : {gameStore?.game?.response.developer}  </Text>
+                        <Text style={{ color: 'white', margin: 20 }} > Category:  {gameStore?.game?.response?.category}  </Text>
+                        <Text style={{ color: 'white' }}> Developer: {gameStore?.game?.response.developer}  </Text>
+
                     </View>
                 </View>
                 <Carousel
-                    key={""}
+                    index={gameStore.game.response._id}
                 />
                 <View>
                     <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', height: 60, margin: 30 }} > System Requirements</Text>
@@ -80,7 +88,7 @@ const Detail = ({ item, index }) => {
                         </Text>
                     </View>
                 </View>
-            </ScrollView> 
+            </ScrollView>
         </View>
     )
 }
@@ -90,7 +98,7 @@ export default Detail
 const styles = StyleSheet.create({
 
     container: {
-        backgroundColor: 'black',
+        backgroundColor: '#242038',
         width: '100%',
         height: '100%',
     },
@@ -99,11 +107,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 700,
     },
+    containerImg: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#725AC1',
+        shadowOffset: {
+            width: -4,
+            height: 6,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 5,
+    },
 
     image: {
         height: 200,
-        width: 400,
-        borderRadius: 2
+        width: 380,
+        borderRadius: 2,
     },
 
     containerTitle: {
@@ -114,7 +134,6 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         margin: 5,
-        opacity: 0.5,
     },
     containerDescription: {
         height: 150,
@@ -122,14 +141,12 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         backgroundColor: '#725AC1',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     description: {
         color: 'white',
-        margin: 5,
         textAlign: 'center',
-        opacity: 0.7
     },
     containerIcons: {
         width: '95%',
@@ -154,10 +171,9 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 20,
+        height: 80,
     },
     containerFirstReq: {
-        margin: 10,
         height: 110,
         width: '80%',
         backgroundColor: '#16202D',
@@ -183,3 +199,4 @@ const styles = StyleSheet.create({
         marginBottom: 60
     }
 })
+
