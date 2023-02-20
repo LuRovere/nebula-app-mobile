@@ -3,7 +3,7 @@ import { StyleSheet, Text, View,Pressable,Image } from 'react-native'
 import MiniCard, {SLIDER_WIDTH,ITEM_WIDTH} from './MiniCard'
 import Carousel, {Pagination} from 'react-native-snap-carousel'
 import { useSelector,useDispatch } from 'react-redux'
-import allGamesActions from "../store/allGames/actions";
+import allGamesActions from "../../store/allGames/actions";
 import { useFocusEffect } from '@react-navigation/native'
 
 const { getAllGames } = allGamesActions;
@@ -11,8 +11,8 @@ const { getAllGames } = allGamesActions;
 export default function Carrusel({navigation}) {
 
   const dispatch = useDispatch()
-  const games = useSelector((store)=>store.allgames.allgames)
-  console.log(games)
+  const gamesStore = useSelector((store) => store?.allgames?.allgames?.allgames);
+
 
   useFocusEffect(
     useCallback(()=>{
@@ -33,7 +33,7 @@ export default function Carrusel({navigation}) {
         layout="tinder"
         layoutCardOffset={9}
         ref={isCarousel}
-        data={games}
+        data={gamesStore}
         renderItem={MiniCard}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}

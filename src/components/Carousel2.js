@@ -14,11 +14,10 @@ const Carousel2 = ({item, index })=>{
 
       <View style={styles.container} key={index}>
       <Image
-        source={{ uri: item.imgUrl }}
+        source={{ uri: item.image }}
         style={styles.image}
       />
       
-      <Text>ayuda</Text>
     </View>
     )
 }

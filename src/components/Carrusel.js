@@ -1,17 +1,18 @@
-import React, { useCallback } from 'react'
-import { StyleSheet, Text, View,Pressable,Image } from 'react-native'
-import Carousel2, {SLIDER_WIDTH,ITEM_WIDTH} from './Carousel2'
-import Carousel, {Pagination} from 'react-native-snap-carousel'
-import { useSelector,useDispatch } from 'react-redux'
+import React, { useCallback } from "react";
+import { StyleSheet, Text, View, Pressable, Image } from "react-native";
+import Carousel2, { SLIDER_WIDTH, ITEM_WIDTH } from "./Carousel2";
+import Carousel, { Pagination } from "react-native-snap-carousel";
+import { useSelector, useDispatch } from "react-redux";
 import allGamesActions from "../store/allGames/actions";
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect } from "@react-navigation/native";
 
 const { getAllGames } = allGamesActions;
 
-export default function Carrusel({navigation}) {
-
-  const dispatch = useDispatch()
-  const games = useSelector((store)=>store?.allgames?.allgames)
+export default function Carrusel({ navigation }) {
+  const dispatch = useDispatch();
+  const gamesStore = useSelector(
+    (store) => store?.allgames?.allgames?.allgames
+  );
 
   const data = [
     {
@@ -31,49 +32,38 @@ export default function Carrusel({navigation}) {
     },
   ];
 
-
   useFocusEffect(
-    useCallback(()=>{
-    dispatch(getAllGames(""))
-  },[])
-  )
-  
-  //console.log(games) 
-  
-  const [index,setIndex] = React.useState(0)
-  const isCarousel = React.useRef(null)
-  
-  
+    useCallback(() => {
+      dispatch(getAllGames(""));
+    }, [])
+  );
+
+  //console.log(games)
+
+  const [index, setIndex] = React.useState(0);
+  const isCarousel = React.useRef(null);
+
   return (
     <View>
-     <View>
-    
-    <Text>ayuda</Text>
-   
-  <Carousel
-        layout="tinder"
-        layoutCardOffset={9}
-        ref={isCarousel}
-        data={data}
-        renderItem={Carousel2}
-        sliderWidth={SLIDER_WIDTH}
-        itemWidth={ITEM_WIDTH}
-        inactiveSlideShift={0}
-        useScrollView={true}
-      />
-         </View>
-<Pagination
-  carouselRef={isCarousel}
-/>
-
+      <View>
+        <Carousel
+          layout="tinder"
+          layoutCardOffset={9}
+          ref={isCarousel}
+          data={gamesStore}
+          renderItem={Carousel2}
+          sliderWidth={SLIDER_WIDTH}
+          itemWidth={ITEM_WIDTH}
+          inactiveSlideShift={0}
+          useScrollView={true}
+        />
+      </View>
+      <Pagination carouselRef={isCarousel} />
     </View>
-    
-  )
+  );
 }
 
-const styles = StyleSheet.create({
-  
-})
+const styles = StyleSheet.create({});
 
 /*
 fondo negro : #221F20

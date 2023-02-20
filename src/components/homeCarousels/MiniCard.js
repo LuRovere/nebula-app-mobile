@@ -31,7 +31,7 @@ const Carousel2 = ({item, index })=>{
             ]}
           >
              <Image
-        source={require("../../assets/shopIcon.png")}
+        source={require("../../../assets/shopIcon.png")}
         style={styles.cartImg}
       />
           </Pressable>
@@ -45,7 +45,7 @@ const Carousel2 = ({item, index })=>{
             ]}
           >
              <Image
-        source={require("../../assets/favoriuteIconNavBar.png")}
+        source={require("../../../assets/favoriuteIconNavBar.png")}
         style={styles.favImg}
       />
           </Pressable>
