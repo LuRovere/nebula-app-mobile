@@ -1,28 +1,52 @@
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux"
 
 import Carousel from '../components/carrousel/Carrousel'
-import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
+import gamesActions from '../store/games/action'
+import { useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 
 const { height, width } = Dimensions.get('window')
 
-const Detail = ({ item, index}) => {
-    return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'black' }}>
+const { getGame } = gamesActions;
 
+const Detail = ({ item, index }) => {
+
+    const gameStore = useSelector((store) => store?.games);
+    const dispatch = useDispatch()
+
+    // usar para obtener el id
+/* 
+    const route = useRoute();
+    const id = route.params; */
+
+    useFocusEffect(
+        useCallback(() => {
+            if (gameStore) {
+                dispatch(getGame('63e2ca9058a16079e6c746e9'));
+            }
+        }, ['63e2ca9058a16079e6c746e9'])
+    );
+
+
+    return (
+
+        <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'black' }}>
             <ScrollView style={styles.container}
                 showsVerticalScrollIndicator={false}
             >
                 <View style={styles.containerCard}>
                     <View style={styles.containerImg}>
-                        <Image source={require('../../assets/dark3.jpg')} style={styles.image} />
+                        <Image source={{ uri: gameStore?.game?.response?.image }} style={styles.image} />
                     </View>
                     <View style={styles.containerTitle} >
-                        <Text style={styles.title}>Dark Knigth</Text>
+                        <Text style={styles.title}>  {gameStore.title} </Text>
                     </View>
                     <View style={styles.containerDescription}>
                         <Text style={styles.description}>
-                            Dark Knight is a 3D legendary magic MMOARPG web game featuring the western magical and realistic art style. Built on the Fancy3D engine to give players an immersive experience
+                            {gameStore?.game?.response?.description}
                         </Text>
                     </View>
                     <View style={styles.containerIcons}>
@@ -34,27 +58,27 @@ const Detail = ({ item, index}) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.containerInfo}>
-                        <Text style={{ color: 'gray', margin: 20 }} >Category : MMOARPG </Text>
-                        <Text style={{ color: 'gray' }}> Developer : Yoozo Games</Text>
+                        <Text style={{ color: 'gray', margin: 20 }} >Category :  {gameStore?.game?.response?.category}  </Text>
+                        <Text style={{ color: 'gray' }}> Developer : {gameStore?.game?.response.developer}  </Text>
                     </View>
                 </View>
-                <Carousel 
-                key={""}
+                <Carousel
+                    key={""}
                 />
                 <View>
                     <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', height: 60, margin: 30 }} > System Requirements</Text>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <View style={styles.containerFirstReq}>
-                        <Text style={{ color: 'white', textAlign: 'center', margin: 10 }}>So:  Windows 7 SP1, Windows 8.1, Windows 10 (64-bit). </Text>
-                        <Text style={{ color: 'white', textAlign: 'center', margin: 10 }}> Procesador: Core i5-4430 / AMD FX-6300 </Text>
+                        <Text style={{ color: 'white', textAlign: 'center', margin: 10 }}>So:  {gameStore?.game?.response?.so}  </Text>
+                        <Text style={{ color: 'white', textAlign: 'center', margin: 10 }}> Procesador:  {gameStore?.game?.response?.procesador} </Text>
                     </View>
                     <View style={styles.containerSecondReq}>
                         <Text style={{ color: 'white', textAlign: 'center', margin: 10 }}>
-                            Graphics: GeForce GTX 960 2GB / AMD Radeon R7 370 2GB.
+                            Graphics:  {gameStore?.game?.response?.graphics}
                         </Text>
                         <Text style={{ color: 'white', textAlign: 'center', margin: 10 }}>
-                            Ram: 8 GB
+                            Ram: {gameStore?.game?.response?.ram}
                         </Text>
                     </View>
                 </View>

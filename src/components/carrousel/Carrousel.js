@@ -1,48 +1,26 @@
 import { Dimensions, Image, Text, Touchable, TouchableOpacity, View } from "react-native";
 
 import { FlatList } from "react-native-gesture-handler";
+import { useSelector } from "react-redux"
 import { useState } from "react";
 
 const { height, width } = Dimensions.get('window')
+export default function Carousel({ key }) {
 
+    const gameStore = useSelector((store) => store?.games?.game?.response);
+    
+    const pics = gameStore?.trailer.map((x) => x)
+    console.log(pics)
 
-export default function Carousel({key}) {
-    const tuData = [
-        {
-            nombre: 'Machu Picchu',
-            descripcion: 'Antigua ciudad inca en Perú',
-            imagen: 'https://analisadaily.com/imagesfile/202211/20221129-192005_valorant-akan-segera-hadir-di-android.jpeg',
-        },
-        {
-            nombre: 'Gran Cañón',
-            descripcion: 'Parque nacional en Arizona, Estados Unidos',
-            imagen: 'https://www.mmogames.com/uploads/public/Dark_Knight2_560x315_0d1ff79c6f/Dark_Knight2_560x315_0d1ff79c6f.png',
-        },
-        {
-            nombre: 'Torre Eiffel',
-            descripcion: 'Monumento en París, Francia',
-            imagen: 'https://dk.opogame.com/sites/all/files/opogame-dk/screens/loading_4.jpg',
-        }, 
-        {
-            nombre: 'Machu Picchu',
-            descripcion: 'Antigua ciudad inca en Perú',
-            imagen: 'https://analisadaily.com/imagesfile/202211/20221129-192005_valorant-akan-segera-hadir-di-android.jpeg',
-        },
-        {
-            nombre: 'Torre Eiffel',
-            descripcion: 'Monumento en París, Francia',
-            imagen: 'https://dk.opogame.com/sites/all/files/opogame-dk/screens/loading_4.jpg',
-        }, 
-    ];
 
     const [currentIndex, setCurrentIndex] = useState(0)
+    const [store, setStore] = useState(false)
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ height: height / 2 }}>
-
                 <FlatList
-                    data={tuData}
+                    data={gameStore.trailer}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
@@ -53,23 +31,31 @@ export default function Carousel({key}) {
                     }}
                     renderItem={({ item, index }) => {
                         return (
-                            <View style={{
-                                width: width,
-                                height: height / 2,
-                                justifyContent: 'center',
-                                alignItems: 'center'
-                            }}>
-                                <TouchableOpacity
-                                    disabled={true}
-                                    style={{
-                                        width: '95%',
-                                        height: '80%',
-                                    }}>
-                                    <Image
-                                        source={{uri: item.imagen}}
-                                        style={{width: '100%', height: '100%', borderRadius: 10 }}
-                                    />
-                                </TouchableOpacity>
+                            <View >
+                                <View style={{
+                                    width: width,
+                                    height: height / 2,
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <TouchableOpacity
+                                        disabled={true}
+                                        style={{
+                                            width: '100%',
+                                            height: '80%',
+                                            flexDirection: 'row-reverse'
+                                        }}>
+                                        {gameStore.trailer.map((pic) => {
+                                            return (
+                                                <Image
+                                                    source={{ uri: pic }}
+                                                    style={{ width: '100%', height: '80%', borderRadius: 10 }}
+                                                    key={item.title}
+                                                />
+                                            )
+                                        })}
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         );
                     }}
@@ -82,7 +68,7 @@ export default function Carousel({key}) {
                 alignItems: 'center'
             }}>
                 {
-                    tuData.map((item, index) => {
+                    pics.map((item, index) => {
                         return (
                             <View style={{
                                 width: currentIndex == index ? 40 : 8,
@@ -100,3 +86,4 @@ export default function Carousel({key}) {
     )
 }
 
+ 
