@@ -7,9 +7,11 @@ import Home from '../screens/Home';
 import Login from '../screens/Login';
 import MenuButtons from '../components/MenuButtons';
 import Payment from '../components/payment/Payment';
+import SignIn from '../screens/SignIn';
 import React from 'react'
 import Store from '../screens/Store';
 import { StyleSheet } from 'react-native';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -24,7 +26,10 @@ const DrawerNavigation = () => {
     <Drawer.Screen name="Detail" component={Detail} />
     <Drawer.Screen name="Store" component={Store} />
     <Drawer.Screen name="Payment" component={Payment}/>
+    <Drawer.Screen name="SignIn" component={SignIn}/>
   </Drawer.Navigator>
+ 
+  
   )
 }
 
@@ -45,6 +50,9 @@ const MenuItems = ({navigation}) => {
       <MenuButtons
       /* text= 'Payment' */
       onPress={() => navigation.navigate('Payment')} />
+      <MenuButtons
+      text= 'SignIn'
+      onPress={() => navigation.navigate('SignIn')} />
     </DrawerContentScrollView>
   )
 }
