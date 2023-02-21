@@ -10,6 +10,7 @@ const SignIn = ({navigation}) => {
     const [mail, setmail] = useState('')
     const [password, setPassword] = useState('')
     const { messages } = useSelector(store =>store.auth) 
+    console.log(messages);
     const dispatch = useDispatch()
 
     const handleMail = (text) => {
@@ -26,7 +27,7 @@ const SignIn = ({navigation}) => {
             password: password
         }
 
-        let res = await dispatch(iniciar_session(data))
+        let res = await dispatch(iniciar_sesion(data))
         if (res.payload.success) {
             navigation.navigate('Home')
         }
