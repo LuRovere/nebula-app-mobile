@@ -42,8 +42,8 @@ const MenuItems = ({navigation}) => {
       text= 'Home'
       onPress={() => navigation.navigate('Home')} />
       <MenuButtons
-      text= 'Login'
-      onPress={() => navigation.navigate('Login')} />
+      text= 'Favorites'
+      onPress={() => navigation.navigate('Favorites')} />
       <MenuButtons
       text= 'Store'
       onPress={() => navigation.navigate('Store')} />

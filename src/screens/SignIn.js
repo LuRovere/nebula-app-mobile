@@ -39,7 +39,7 @@ const SignIn = ({navigation}) => {
         <View style={styles.container}>
   <View style={styles.logoContainer}>
     <Image
-      source={require('../../assets/nebulaIsotipeLogotipePosibleVersion.png')}
+      source={require('../../assets/nebulalogo.png')}
       style={styles.logo}
     />
   </View>
@@ -56,13 +56,13 @@ const SignIn = ({navigation}) => {
       onChangeText={handlePassword}
     />
     <TouchableOpacity onPress={captureData} style={styles.sendBtn}>
-      <Text style={styles.sendBtnText}>Send</Text>
+      <Text style={styles.sendBtnText}>SignIn</Text>
     </TouchableOpacity>
   </View>
   <View style={styles.signupContainer}>
     <Text style={styles.signupText}>Still don't have an account?</Text>
     <TouchableOpacity style={styles.signupBtn}>
-      <Text style={styles.signupBtnText}>Sign Up</Text>
+      <Text style={styles.signupBtnText}>SignIn</Text>
     </TouchableOpacity>
   </View>
 </View>
@@ -74,7 +74,7 @@ const SignIn = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '#221F20',
       alignItems: 'center',
       justifyContent: 'center',
     },

@@ -1,46 +1,63 @@
-import { createAsyncThunk  } from "@reduxjs/toolkit";
+
+ import { createAsyncThunk  } from "@reduxjs/toolkit";
 import axios from "axios";
-
-import { API_URL } from "../../../configs";
-
+import { API_URL } from '../../../configs'
 
 const  addCart = createAsyncThunk(
     "addCart",
-    async(games, token) => {
+    async( {game_id, token}) => {
         try{
-
-            let url = `${API_URL}shopping-cart/`
-
+            let url = `${API_URL}carts`
             let headers = {headers: {'Authorization': `Bearer ${token}`}}
-            const response = await axios.post(url ,games, headers)
-            console.log(response);
+            const response = await axios.post(url, game_id,  headers)
+            //console.log(response);
             return{
-                response: response.data
+                success: true,
+                response: response.data.response
             }
         }catch(error){
             console.log(error)
         } 
     }
 )
-const deleteCart = createAsyncThunk(
-    "deleteCart",
-    async(games, token) => {
-        try{
+const  deleteCart = createAsyncThunk(
+  "deleteCart",
+  async( {_id, token}) => {
+      try{
+          let url = `${API_URL}carts/${_id}`
+          let headers = {headers: {'Authorization': `Bearer ${token}`}}
+          const response = await axios.delete(url,  headers)
 
-            let url = `${API_URL}shopping-cart/`
-
+          return{
+              success: true,
+              response: response.data.response
+          }
+      }catch(error){
+          console.log(error)
+      } 
+  }
+)
+const readCart = createAsyncThunk(
+  "readCart",
+  async( token ) => {
+    try{
+      let url = `${API_URL}carts`
             let headers = {headers: {'Authorization': `Bearer ${token}`}}
-            const response = await axios.delete(url ,games, headers)
-            
-        }catch(error){
-            console.log(error)
-        }
+            const response = await axios.get(url, headers)
+            //console.log(response)
+            return{
+              success:true,
+              response: response.data.response
+            }
+    }catch(error){
+      console.log(error)
     }
+  }
 )
 
-const cartActions = {
-    addCart, deleteCart
-}
-
+const cartActions = {addCart, readCart, deleteCart}
 export default cartActions; 
+
+
+
 

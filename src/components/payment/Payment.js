@@ -7,14 +7,20 @@ import gamesActions from '../../store/games/action'
 import { useCallback } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { useRoute } from '@react-navigation/native';
+import paymentActions from "../../store/cart/mercadoPago.actions"
 
+
+const { payment } =  paymentActions
 const { getGame } = gamesActions;
 
 const { width } = Dimensions.get('window')
 
 export default function Payment() {
 
-    const gameStore = useSelector((store) => store?.games);
+     const gameStore = useSelector((store) => store?.games) ;
+    /* console.log(gameStore.game.response.price) */
+
+    let token = useSelector((store) => store?.auth)
     const dispatch = useDispatch()
 
     const route = useRoute();
@@ -29,8 +35,15 @@ export default function Payment() {
         }, [id])
     );
 
+    const paybtn = () => {
+        let data = {
+          unit_price: Number("1500"),
+        };
+        dispatch(payment({ data,  token  }));
+      };
+
     return (
-        <View
+         <View
             style={{
                 backgroundColor: '#242038',
                 height: '100%',
@@ -38,13 +51,13 @@ export default function Payment() {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-            <ScrollView
+                  <ScrollView
                 style={{ width: '100%', height: '100%', }}
                 showsVerticalScrollIndicator={false}
             >
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                 <View style={{ justifyContent: 'center', alignItems: 'center' }}> 
 
-                    <View style={styles.containerCard}>
+                     <View style={styles.containerCard}>
                         <Image source={{ uri: gameStore?.game?.response?.image }}
                             style={styles.image}
                         />
@@ -80,7 +93,7 @@ export default function Payment() {
                                 }}> ${gameStore.game.response.price} </Text>
                             </View>
 
-                            <Pressable style={{
+                            <Pressable onPress={paybtn} style={{
                                 height: '28%', width: '100%', justifyContent: 'center', alignItems: 'flex-end',
                             }}>
                                 <Text style={{ fontSize: 15, textAlign: 'center', color: 'white', backgroundColor: '#725AC1', padding: 8, marginRight: 20, borderRadius: 10 }}>Comprar</Text>
@@ -91,9 +104,9 @@ export default function Payment() {
                             />
                         </View>
                     </View>
-                </View>
-            </ScrollView>
-        </View>
+                </View>  
+            </ScrollView>     
+        </View> 
     )
 }
 

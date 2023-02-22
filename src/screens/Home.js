@@ -69,16 +69,16 @@ const Home = ({navigation}) => {
       </View>
       <View style={styles.line}></View>
       <Text style={styles.titleGames}> Games </Text>
-      {/* <Carrusel /> */}
+       <Carrusel />  
 
       <Text style={styles.titleGames}>  Play the highest quallity games  </Text>
-      {/* <Expensives /> */}
+       <Expensives />  
 
       <Text style={styles.titleGames}>  Play the cheapest games  </Text>
 
-      {/* <CheapCarousel /> */}
+       <CheapCarousel /> 
       <Text style={styles.titleGames}>  Play the best free games  </Text>
-      {/* <MiniCarousel /> */}
+       <MiniCarousel />  
     </ScrollView>
   );
 };

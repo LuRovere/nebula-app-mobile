@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import "../../public/assets/favimg.jpg" 
 import React from "react";
 import favoritesActions from "../store/favorites/actions";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,17 +22,17 @@ const Favorites = () => {
   //const favorites = favs.response
   return (
     <ScrollView style={styles.container}>
-      {/*  {favs.map((fav)=>(*/}
-      <View style={styles.cardContainer}>
+      
+       {<View style={styles.cardContainer}>
         <View style={styles.card}>
           <Image
-            source={require("../../assets/prueba.jpg")}
-            /* source={{ uri: item.image }} */
+            source={require("../../public/assets/favimg.jpg" )}
+            
             style={styles.image}
           />
         
         <View>
-          <Text style={styles.title}>{/* {fav.title} */}Title de algun juego</Text>
+          <Text style={styles.title}>Blood of Steel</Text>
 
           <View style={styles.buttons}>
           <Pressable onPress={""}
@@ -43,7 +44,7 @@ const Favorites = () => {
             ]}
           >
              <Image
-        source={require("../../assets/shopIcon.png")}
+        source={require("../../public/assets/shopIcon.png")}
         style={styles.cartImg}
       />
           </Pressable>
@@ -57,7 +58,7 @@ const Favorites = () => {
             ]}
           >
              <Image
-        source={require("../../assets/favoriuteIconNavBar.png")}
+        source={require("../../public/assets/favoriuteIconNavBar.png")}
         style={styles.favImg}
       />
           </Pressable>
@@ -70,13 +71,13 @@ const Favorites = () => {
               styles.buttonPrice,
             ]}
           >
-             <Text style={styles.price}>$1234</Text>
+             <Text style={styles.price}>$2535</Text>
           </Pressable>
         </View>
         </View>
-      </View>
+      </View>}  
 
-      {/*     ))}  */}
+      
     </ScrollView>
   );
 };

@@ -6,6 +6,7 @@ import authReducer from './auth/reducers';
 import filterGameReducer from './filterCategory/reducer'
 
 import favoritesReducer from "./favorites/reducers";
+import paymentReducers from "./cart/mercadoPago.reducers"
 
 
 
@@ -16,7 +17,9 @@ export const store = configureStore({
         games: gamesReducer,
         auth: authReducer,
         filterCategories: filterGameReducer,
-        favorites:favoritesReducer
+        favorites:favoritesReducer,
+        payement:paymentReducers
+
     }
 })
 

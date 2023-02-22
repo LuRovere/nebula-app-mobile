@@ -37,10 +37,10 @@ const Detail = ({ navigation }) => {
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'black' }}>
 
-            <ScrollView style={styles.container}
+                  <ScrollView style={styles.container}
                 showsVerticalScrollIndicator={false}
             >
-                <View style={styles.containerCard}>
+                 <View style={styles.containerCard}>
                     <View style={styles.containerImg}>
                         <Image source={{ uri: gameStore?.game?.response?.image }} style={styles.image} />
                     </View>
@@ -87,8 +87,8 @@ const Detail = ({ navigation }) => {
                             Ram: {gameStore?.game?.response?.ram}
                         </Text>
                     </View>
-                </View>
-            </ScrollView>
+                </View> 
+            </ScrollView>     
         </View>
     )
 }

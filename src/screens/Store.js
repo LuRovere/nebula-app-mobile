@@ -8,10 +8,12 @@ import { useFocusEffect } from '@react-navigation/native'
 
 const { getAllGamesByFilter, getAllGames } = allGamesActions;
 function Store({ navigation }) {
-  const gamesStore = useSelector((store) => store?.allgames?.allgames?.allgames);
+  const gamesStore = useSelector((store) => store.allgames.allgames.allgames);
   console.log(gamesStore)
   const dispatch = useDispatch();
-  const text = useSelector((store) => store.allgames.text);
+
+   const text = useSelector((store) => store.allgames.text); 
+
   const inputCategory = useSelector(
     (store) => store?.filterCategories.filterGame
   );
@@ -43,7 +45,7 @@ function Store({ navigation }) {
     <ScrollView style={styles.container}
       showsVerticalScrollIndicator={false}
     >
-      <GamesCategories />
+             <GamesCategories />
       <TextInput
         onChangeText={handleText}
         placeholder="Find your game here"
@@ -84,7 +86,7 @@ function Store({ navigation }) {
             </View>
           </TouchableOpacity>
         );
-      })}
+      })}        
     </ScrollView>
   );
 }
