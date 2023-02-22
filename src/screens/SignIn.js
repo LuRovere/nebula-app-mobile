@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
  import authActions from  "../store/auth/actions"
 
+
 const { iniciar_sesion } = authActions
 
 const SignIn = ({navigation}) => {
@@ -22,6 +23,7 @@ const SignIn = ({navigation}) => {
     }
 
     const captureData = async() => {
+        console.log(mail, password);
         let data = { 
             mail: mail,
             password: password
@@ -29,37 +31,99 @@ const SignIn = ({navigation}) => {
 
         let res = await dispatch(iniciar_sesion(data))
         if (res.payload.success) {
-            navigation.navigate('Home')
+            navigation.navigate('Home', { replace: true })
         }
     }
 
     return (
-        <View /* style={styles.container} */>
-            <View /* style={styles.logoContainer} */>
-                {/* <Image source={require('../../assets/nebulaIsotipeLogotipePosibleVersion.png')}/> */}
-            </View>
-            <View /* style={styles.inputContainer} */>
-                <TextInput placeholder= 'Email'/* style={styles.input} */ onChangeText={handleMail}/>
-                <TextInput secureTextEntry={true} placeholder='Passport' /* style={styles.input} */ onChangeText={handlePassword}/>
-                <TouchableOpacity onPress={captureData} /* style={styles.sendBtn} */>
-                        <Text /* style = {styles.btnText} */>Send</Text>
-                </TouchableOpacity>
-            </View>
-            <View /* style={styles.signupContainer} */>
-                <Text>Still dont have account</Text>
-                <TouchableOpacity /* style={styles.signupBtn} */>
-                    <Text /* style={styles.btnText} */>Sign Up</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+        <View style={styles.container}>
+  <View style={styles.logoContainer}>
+    <Image
+      source={require('../../assets/nebulaIsotipeLogotipePosibleVersion.png')}
+      style={styles.logo}
+    />
+  </View>
+  <View style={styles.inputContainer}>
+    <TextInput
+      placeholder="Email"
+      style={styles.input}
+      onChangeText={handleMail}
+    />
+    <TextInput
+      secureTextEntry={true}
+      placeholder="Password"
+      style={styles.input}
+      onChangeText={handlePassword}
+    />
+    <TouchableOpacity onPress={captureData} style={styles.sendBtn}>
+      <Text style={styles.sendBtnText}>Send</Text>
+    </TouchableOpacity>
+  </View>
+  <View style={styles.signupContainer}>
+    <Text style={styles.signupText}>Still don't have an account?</Text>
+    <TouchableOpacity style={styles.signupBtn}>
+      <Text style={styles.signupBtnText}>Sign Up</Text>
+    </TouchableOpacity>
+  </View>
+</View>
+
     )
 
 }
 
 const styles = StyleSheet.create({
-    container:{
-        backgroundColor: '#FFFFFF',
+    container: {
+      flex: 1,
+      backgroundColor: '#FFFFFF',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-})
+    logoContainer: {
+      marginBottom: 50,
+    },
+    logo: {
+      width: 200,
+      height: 100,
+      resizeMode: 'contain',
+    },
+    inputContainer: {
+      width: '80%',
+      marginBottom: 20,
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: '#CCCCCC',
+      padding: 10,
+      marginBottom: 10,
+    },
+    sendBtn: {
+      backgroundColor: '#007AFF',
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+      marginBottom: 10,
+    },
+    sendBtnText: {
+      color: '#FFFFFF',
+      fontSize: 16,
+    },
+    signupContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    signupText: {
+      marginRight: 5,
+    },
+    signupBtn: {
+      backgroundColor: '#007AFF',
+      padding: 5,
+      borderRadius: 5,
+      alignItems: 'center',
+    },
+    signupBtnText: {
+      color: '#FFFFFF',
+      fontSize: 16,
+    },
+  });
 
 export default SignIn;

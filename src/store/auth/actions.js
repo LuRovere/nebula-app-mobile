@@ -23,9 +23,7 @@ const registrar_usuario = createAsyncThunk('registrar_usuario', async (data) => 
 })
 
 const iniciar_sesion = createAsyncThunk('iniciar_sesion', async (data) => {
-
     let url = `${API_URL}auth/signin`
-
     try {
         let res = await axios.post(url,data)
         return { 
@@ -40,6 +38,7 @@ const iniciar_sesion = createAsyncThunk('iniciar_sesion', async (data) => {
         }
     }
 })
+
 
 const iniciar_sesion_con_token = createAsyncThunk('iniciar_sesion_con_token', async (token) => {
 
